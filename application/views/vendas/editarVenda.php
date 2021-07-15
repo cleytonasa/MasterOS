@@ -100,14 +100,14 @@
 												echo '<td><div align="center">' . $p->codDeBarra . '</div></td>';
                                                 echo '<td>' . $p->descricao . '</td>';
                                                 echo '<td><div align="center">' . $p->quantidade . '</div></td>';
-                                                echo '<td><div align="center">R$ ' . $preco . '</div></td>';
+                                                echo '<td><div align="center">R$: ' . $preco . '</div></td>';
                                                 echo '<td><div align="center"><a href="" idAcao="' . $p->idItens . '" prodAcao="' . $p->idProdutos . '" quantAcao="' . $p->quantidade . '" title="Excluir Produto" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a></div></td>';
-                                                echo '<td><div align="center">R$ ' . number_format($p->subTotal, 2, ',', '.') . '</div></td>';
+                                                echo '<td><div align="center">R$: ' . number_format($p->subTotal, 2, ',', '.') . '</div></td>';
                                                 echo '</tr>';
                                             } ?>
                                             <tr>
                                                 <td colspan="6" style="text-align: right"><strong>Total:</strong></td>
-                                                <td><div align="center"><strong>R$
+                                                <td><div align="center"><strong>R$:
                                                         <?php echo number_format($total, 2, ',', '.'); ?></strong> <input type="hidden" id="total-venda" value="<?php echo number_format($total, 2); ?>"></div></td>
                                             </tr>
                                         </tbody>
@@ -143,7 +143,7 @@
 <div id="modal-faturar" class="modal hide fade widget_box_vizualizar4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form id="formFaturar" action="<?php echo current_url() ?>" method="post">
         <div class="modal_header_anexos">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <button type="button" class="close" style="color:#f00" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Faturar Venda</h3>
         </div>
         <div class="modal-body">
@@ -161,12 +161,19 @@
                 </div>
             </div>
             <div class="span12" style="margin-left: 0">
-                <div class="span4" style="margin-left: 0">
+                <div class="span5" style="margin-left: 0">
                     <label for="valor">Valor*</label>
                     <input type="hidden" id="tipo" name="tipo" value="receita" />
                     <input class="span12 money" id="valor" type="text" name="valor" value="<?php echo number_format($total, 2); ?> " />
+                    <strong><span style="color: red" id="resultado"></span></strong>
                 </div>
-                <div class="span4">
+               <div class="span4">
+                    <label>Desconto</label>
+                    <input style="width: 4em;" id="num2"  type="text" placeholder="%" onblur="calcular()" maxlength="3" size="2"/>
+                </div>
+            </div>  
+             <div class="span12" style="margin-left: 0">
+                <div class="span4" style="margin-left: 0">
                     <label for="vencimento">Data Entrada*</label>
                     <input class="span12 datepicker" autocomplete="off" id="vencimento" type="text" name="vencimento" />
                 </div>
@@ -186,9 +193,9 @@
                         <select name="formaPgto" id="formaPgto" class="span12">
                             <option value="Dinheiro">Dinheiro</option>
                             <option value="Cartão de Crédito">Cartão de Crédito</option>
+                            <option value="Débito">Débito</option>
                             <option value="Boleto">Boleto</option>
                             <option value="Depósito">Depósito</option>
-                            <option value="Débito">Débito</option>
                             <option value="Pix">Pix</option>
                         </select>
                     </div>
@@ -204,7 +211,20 @@
 <script type="text/javascript" src="<?php echo base_url() ?>assets/js/jquery.validate.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/maskmoney.js"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
+    function calcular(){
+    var desconto = Number(document.getElementById("valor").value);
+    var num2 = Number(document.getElementById("num2").value);
+    var elemResult = document.getElementById("resultado");
+	
+    if (elemResult.textContent === undefined) {
+       elemResult.textContent = "Preço com Desconto: R$ " + String(desconto - num2 * desconto / 100) + ".	";
+    }
+    else { // IE
+       elemResult.innerText = "(Preço com Desconto: R$ " + String(desconto - num2 * desconto / 100) + ")";
+    }
+	}
+	
+	$(document).ready(function() {
         $(".money").maskMoney();
         $('#recebido').click(function(event) {
             var flag = $(this).is(':checked');

@@ -19,13 +19,13 @@ class Mapos extends MY_Controller
 
     public function index()
     {
-				$this->data['ordens1'] = $this->mapos_model->getOsOrcamento();
-				$this->data['ordens2'] = $this->mapos_model->getOsOrcamentoConcluido();
-				$this->data['ordens3'] = $this->mapos_model->getOsOrcamentoAprovado();
-				$this->data['ordens4'] = $this->mapos_model->getOsEmAndamento();
-				$this->data['ordens5'] = $this->mapos_model->getOsAguardandoPecas();
-				$this->data['ordens6'] = $this->mapos_model->getOsConcluido();
-				$this->data['ordens7'] = $this->mapos_model->getOsEntregueAReceber();
+        $this->data['ordens1'] = $this->mapos_model->getOsOrcamento();
+        $this->data['ordens2'] = $this->mapos_model->getOsOrcamentoConcluido();
+        $this->data['ordens3'] = $this->mapos_model->getOsOrcamentoAprovado();
+        $this->data['ordens4'] = $this->mapos_model->getOsEmAndamento();
+        $this->data['ordens5'] = $this->mapos_model->getOsAguardandoPecas();
+        $this->data['ordens6'] = $this->mapos_model->getOsConcluido();
+        $this->data['ordens7'] = $this->mapos_model->getOsEntregueAReceber();
         $this->data['produtos'] = $this->mapos_model->getProdutosMinimo();
         $this->data['os'] = $this->mapos_model->getOsEstatisticas();
         $this->data['estatisticas_financeiro'] = $this->mapos_model->getEstatisticasFinanceiro();
@@ -78,6 +78,7 @@ class Mapos extends MY_Controller
         $data['results'] = $this->mapos_model->pesquisar($termo);
         $this->data['produtos'] = $data['results']['produtos'];
         $this->data['servicos'] = $data['results']['servicos'];
+        $this->data['equipamento_os'] = $data['results']['equipamento_os'];
         $this->data['os'] = $data['results']['os'];
         $this->data['clientes'] = $data['results']['clientes'];
         $this->data['view'] = 'mapos/pesquisa';
@@ -333,8 +334,8 @@ class Mapos extends MY_Controller
             $this->session->set_flashdata('error', 'Você não tem permissão para configurar o sistema');
             redirect(base_url());
         }
+		
         $this->data['menuConfiguracoes'] = 'Sistema';
-
         $this->load->library('form_validation');
         $this->load->model('mapos_model');
 
@@ -350,6 +351,7 @@ class Mapos extends MY_Controller
         $this->form_validation->set_rules('control_baixa', 'Controle de Baixa', 'required|trim');
         $this->form_validation->set_rules('control_editos', 'Controle de Edição de OS', 'required|trim');
         $this->form_validation->set_rules('control_datatable', 'Controle de Visualização em DataTables', 'required|trim');
+		$this->form_validation->set_rules('os_status_list[]', 'Controle de visualização de OS', 'required|trim', ['required' => 'Selecione ao menos uma das opções!']);
         $this->form_validation->set_rules('pix_key', 'Chave Pix', 'trim|valid_pix_key', [
             'valid_pix_key' => 'Chave Pix inválida!',
         ]);
@@ -385,6 +387,7 @@ class Mapos extends MY_Controller
 				'control_editos' => $this->input->post('control_editos'),
 				'control_datatable' => $this->input->post('control_datatable'),
 				'pix_key' => $this->input->post('pix_key'),
+				'os_status_list' => json_encode($this->input->post('os_status_list')),
             ];
             if ($this->mapos_model->saveConfiguracao($data) == true) {
                 $this->session->set_flashdata('success', 'Configurações do sistema atualizadas com sucesso!');

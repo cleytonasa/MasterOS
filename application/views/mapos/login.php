@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+<style type="text/css">
+body {
+        overflow: hidden;
+    }
+</style>
+
 
 <head>
-    <title><?= $this->config->item('app_name') ?> </title>
+<title><?= $this->config->item('app_name') ?> </title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/bootstrap-responsive.min.css" />
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/matrix-login.css" />
     <link href="<?= base_url(); ?>assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <script src="<?= base_url() ?>assets/js/jquery-1.12.4.min.js"></script>
+<script src="<?= base_url() ?>assets/js/jquery-1.12.4.min.js"></script>
 </head>
 
 <body>
@@ -21,7 +27,7 @@
                     <?= $this->session->flashdata('error'); ?>
                 </div>
             <?php } ?>
-            <div class="control-group normal_text">
+            <div class="control-group" align="center">
                 <h3><img src="<?= base_url() ?>assets/img/logo.png" alt="Logo" /></h3>
             </div>
             <div class="control-group">
@@ -52,7 +58,7 @@
     
     <div id="notification" class="modal hide fade widget_box_vizualizar4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal_header_login">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <button type="button" class="close" style="color:#f00" data-dismiss="modal" aria-hidden="true">×</button>
             <h8 id="myModalLabel"><?= $this->config->item('app_name') ?></h8>
         </div>
         <div class="modal-body">

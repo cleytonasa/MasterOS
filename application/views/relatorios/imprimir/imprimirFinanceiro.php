@@ -47,16 +47,10 @@
                                     foreach ($lancamentos as $l) {
                                         $vencimento = date('d/m/Y', strtotime($l->data_vencimento));
                                         $pagamento = date('d/m/Y', strtotime($l->data_pagamento));
-                                        if ($l->baixado == 1) {
-                                            $situacao = 'Pago';
-                                        } else {
-                                            $situacao = 'Pendente';
-                                        }
-                                        if ($l->tipo == 'receita') {
-                                            $totalReceita += $l->valor;
-                                        } else {
-                                            $totalDespesa += $l->valor;
-                                        }
+                                        if ($l->baixado == 1) {$situacao = 'Pago';}
+										else {$situacao = 'Pendente';}
+										if ($l->tipo == 'receita') {$totalReceita += $l->valor;}
+										else {$totalDespesa += $l->valor;}
                                         echo '<tr>';
 										echo '<td>' . $l->cliente_fornecedor . '</td>';
                                         echo '<td>' . $l->descricao . '</td>';
@@ -76,7 +70,7 @@
                                         <strong>Total Receitas:</strong>
                                     </td>
                                     <td colspan="3" style="text-align: left; color: green">
-                                        <strong>R$
+                                        <strong>R$:
                                             <?php echo number_format($totalReceita, 2, ',', '.') ?>
                                         </strong>
                                     </td>
@@ -86,7 +80,7 @@
                                         <strong>Total Despesas:</strong>
                                     </td>
                                     <td colspan="3" style="text-align: left; color: red">
-                                        <strong>R$
+                                        <strong>R$:
                                             <?php echo number_format($totalDespesa, 2, ',', '.') ?>
                                         </strong>
                                     </td>
@@ -96,7 +90,7 @@
                                         <strong>Saldo:</strong>
                                     </td>
                                     <td colspan="3" style="text-align: left;">
-                                        <strong>R$
+                                        <strong>R$:
                                             <?php echo number_format($totalReceita - $totalDespesa, 2, ',', '.') ?>
                                         </strong>
                                     </td>

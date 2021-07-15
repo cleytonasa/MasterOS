@@ -8,9 +8,7 @@
     <h5>Vendas</h5>
     </div>
     <div class="widget-content nopadding">
-    <!--
-    <div class="widget_box_Painel2">
-    -->
+    
         <table id="tabela" width="100%" class="table_p">
             <thead>
                 <tr style="background-color: #2D335B">
@@ -66,7 +64,7 @@
 <div id="modal-excluir" class="modal hide fade widget_box_vizualizar4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form action="<?php echo base_url() ?>index.php/vendas/excluir" method="post">
         <div class="modal_header_anexos">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <button type="button" class="close" style="color:#f00" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Excluir Venda</h3>
         </div>
         <div class="modal-body">

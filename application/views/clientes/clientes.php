@@ -8,10 +8,7 @@
     <h5>Clientes</h5>
     </div>
     <div class="widget-content nopadding">
-    <!--
-    <div class="widget_box_Painel2">
-    -->
-        <table id="tabela" width="100%" class="table_p">
+    <table id="tabela" width="100%" class="table_p">
             <thead>
                 <tr>
                     <th>Cod.</th>
@@ -32,7 +29,7 @@
                                 </tr>';
                     }
                     foreach ($results as $r) {
-						$NomeClienteShort = mb_strimwidth(strip_tags($r->nomeCliente), 0, 44, "...");
+						$NomeClienteShort = mb_strimwidth(strip_tags($r->nomeCliente), 0, 45, "...");
 						
                         echo '<tr>';
                         echo '<td><div align="center">' . $r->idClientes . '</div></td>';
@@ -48,7 +45,7 @@
                         }
 						if ($this->permission->checkPermission($this->session->userdata('permissao'), 'vCliente')) {
                                 $zapnumber = preg_replace("/[^0-9]/", "", $r->telefone);
-								echo '<a class="btn btn-success tip-top" style="margin-right: 1%" title="Enviar Msg WhatsApp" id="enviarWhatsApp" target="_blank" href="https://web.whatsapp.com/send?phone=55' . $zapnumber . '"><i class="fab fa-whatsapp" style="font-size:16px;"></i></a>';
+								echo '<a class="btn btn-success tip-top" style="margin-right: 1%" title="Enviar Msg WhatsApp" id="enviarWhatsApp" href="whatsapp://send?phone=55' . $zapnumber . '"><i class="fab fa-whatsapp" style="font-size:16px;"></i></a>';
                             }
                         if ($this->permission->checkPermission($this->session->userdata('permissao'), 'eCliente')) {
                             echo '<a href="' . base_url() . 'index.php/clientes/editar/' . $r->idClientes . '" style="margin-right: 1%" class="btn btn-info tip-top" title="Editar Cliente"><i class="fas fa-edit"></i></a>';
@@ -71,7 +68,7 @@
 <div id="modal-excluir" class="modal hide fade widget_box_vizualizar4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form action="<?php echo base_url() ?>index.php/clientes/excluir" method="post">
         <div class="modal_header_anexos">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <button type="button" class="close" style="color:#f00" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Excluir Cliente</h3>
         </div>
         <div class="modal-body">

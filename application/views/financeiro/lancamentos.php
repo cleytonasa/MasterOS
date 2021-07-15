@@ -138,15 +138,15 @@ $periodo = $this->input->get('periodo');
                         $label = 'important';
                     }
                     echo '<tr>';
-                    echo '<td>' . $r->idLancamentos . '</td>';
-                    echo '<td><span class="label label-' . $label . '">' . ucfirst($r->tipo) . '</span></td>';
-                    echo '<td>' . $r->cliente_fornecedor . '</td>';
-                    echo '<td>' . $r->descricao . '</td>';
-                    echo '<td>' . $vencimento . '</td>';
-                    echo '<td>' . $status . '</td>';
-                    echo '<td>' . $r->observacoes . '</td>';
-                    echo '<td> R$ ' . number_format($r->valor, 2, ',', '.') . '</td>';
-                    echo '<td>';
+                    echo '<td><div align="center">' . $r->idLancamentos . '</td>';
+                    echo '<td><div align="center"><span class="label label-' . $label . '">' . ucfirst($r->tipo) . '</span></td>';
+                    echo '<td><div align="center">' . $r->cliente_fornecedor . '</td>';
+                    echo '<td><div align="center">' . $r->descricao . '</td>';
+                    echo '<td><div align="center">' . $vencimento . '</td>';
+                    echo '<td><div align="center">' . $status . '</td>';
+                    echo '<td><div align="center">' . $r->observacoes . '</td>';
+                    echo '<td><div align="center">R$: ' . number_format($r->valor, 2, ',', '.') . '</td>';
+                    echo '<td><div align="center">';
                     if ($this->permission->checkPermission($this->session->userdata('permissao'), 'eLancamento')) {
                         echo '<a href="#modalEditar" style="margin-right: 1%" data-toggle="modal" role="button" idLancamento="' . $r->idLancamentos . '" descricao="' . $r->descricao . '" valor="' . $r->valor . '" vencimento="' . date('d/m/Y', strtotime($r->data_vencimento)) . '" pagamento="' . date('d/m/Y', strtotime($r->data_pagamento)) . '" baixado="' . $r->baixado . '" cliente="' . $r->cliente_fornecedor . '" formaPgto="' . $r->forma_pgto . '" tipo="' . $r->tipo . '" observacoes="' . $r->observacoes . '" usuario="' . $r->nome . '" class="btn btn-info tip-top editar" title="Editar Lançamento"><i class="fas fa-edit"></i></a>';
                     }
@@ -162,17 +162,17 @@ $periodo = $this->input->get('periodo');
                 <tr>
                     <td colspan="7" style="text-align: right; color: green"><strong>Total Receitas:</strong></td>
                     <td colspan="3" style="text-align: left; color: green">
-                        <strong>R$ <?php echo number_format($totals['receitas'], 2, ',', '.') ?></strong></td>
+                        <strong>R$: <?php echo number_format($totals['receitas'], 2, ',', '.') ?></strong></td>
                 </tr>
                 <tr>
                     <td colspan="7" style="text-align: right; color: red"><strong>Total Despesas:</strong></td>
                     <td colspan="3" style="text-align: left; color: red">
-                        <strong>R$ <?php echo number_format($totals['despesas'], 2, ',', '.') ?></strong></td>
+                        <strong>R$: <?php echo number_format($totals['despesas'], 2, ',', '.') ?></strong></td>
                 </tr>
                 <tr>
                     <td colspan="7" style="text-align: right"><strong>Saldo:</strong></td>
                     <td colspan="3" style="text-align: left;">
-                        <strong>R$ <?php echo number_format($totals['receitas'] - $totals['despesas'], 2, ',', '.') ?></strong>
+                        <strong>R$: <?php echo number_format($totals['receitas'] - $totals['despesas'], 2, ',', '.') ?></strong>
                     </td>
                 </tr>
                 </tfoot>
@@ -191,7 +191,7 @@ $periodo = $this->input->get('periodo');
      aria-hidden="true">
     <form id="formReceita" action="<?php echo base_url() ?>index.php/financeiro/adicionarReceita" method="post">
         <div class="modal_header_anexos">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <button type="button" class="close" style="color:#f00" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Adicionar Receita</h3>
         </div>
         <div class="modal-body">
@@ -221,7 +221,7 @@ $periodo = $this->input->get('periodo');
                 <div class="span4" style="margin-left: 0">
                     <label for="valor">Valor*</label>
                     <input type="hidden" id="tipo" name="tipo" value="receita"/>
-                    <input class="span12 money" id="valor" type="text" name="valor"/>
+                    <input class="span12 money" id="valor" type="text" name="valor" data-affixes-stay="true" data-thousands="" data-decimal="." />
                 </div>
                 <div class="span4">
                     <label for="vencimento">Data Vencimento*</label>
@@ -244,9 +244,9 @@ $periodo = $this->input->get('periodo');
                         <select name="formaPgto" id="formaPgto" class="span12">
                             <option value="Dinheiro">Dinheiro</option>
                             <option value="Cartão de Crédito">Cartão de Crédito</option>
+                            <option value="Débito">Débito</option>
                             <option value="Boleto">Boleto</option>
                             <option value="Depósito">Depósito</option>
-                            <option value="Débito">Débito</option>
                             <option value="Pix">Pix</option>
                         </select>
                     </div>
@@ -267,7 +267,7 @@ $periodo = $this->input->get('periodo');
      aria-hidden="true">
     <form id="formDespesa" action="<?php echo base_url() ?>index.php/financeiro/adicionarDespesa" method="post">
         <div class="modal_header_anexos">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <button type="button" class="close" style="color:#f00" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Adicionar Despesa</h3>
         </div>
         <div class="modal-body">
@@ -296,7 +296,7 @@ $periodo = $this->input->get('periodo');
                 <div class="span4" style="margin-left: 0">
                     <label for="valor">Valor*</label>
                     <input type="hidden" name="tipo" value="despesa"/>
-                    <input class="span12 money" type="text" name="valor"/>
+                    <input class="span12 money" type="text" name="valor" data-affixes-stay="true" data-thousands="" data-decimal="." />
                 </div>
                 <div class="span4">
                     <label for="vencimento">Data Vencimento*</label>
@@ -320,9 +320,9 @@ $periodo = $this->input->get('periodo');
                         <select name="formaPgto" class="span12">
                             <option value="Dinheiro">Dinheiro</option>
                             <option value="Cartão de Crédito">Cartão de Crédito</option>
+                            <option value="Débito">Débito</option>
                             <option value="Boleto">Boleto</option>
                             <option value="Depósito">Depósito</option>
-                            <option value="Débito">Débito</option>
                             <option value="Pix">Pix</option>
                         </select>
                     </div>
@@ -344,7 +344,7 @@ $periodo = $this->input->get('periodo');
      aria-hidden="true">
     <form id="formEditar" action="<?php echo base_url() ?>index.php/financeiro/editar" method="post">
         <div class="modal_header_anexos">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <button type="button" class="close" style="color:#f00" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Editar Lançamento</h3>
         </div>
         <div class="modal-body">
@@ -372,7 +372,7 @@ $periodo = $this->input->get('periodo');
                     <label for="valor">Valor*</label>
                     <input type="hidden" name="tipo" value="despesa"/>
                     <input type="hidden" id="idEditar" name="id" value=""/>
-                    <input class="span12 money" type="text" name="valor" id="valorEditar"/>
+                    <input class="span12 money" type="text" name="valor" id="valorEditar" data-affixes-stay="true" data-thousands="" data-decimal="." />
                 </div>
                 <div class="span4">
                     <label for="vencimento">Data Vencimento*</label>
@@ -403,9 +403,9 @@ $periodo = $this->input->get('periodo');
                         <select name="formaPgto" id="formaPgtoEditar" class="span12">
                             <option value="Dinheiro">Dinheiro</option>
                             <option value="Cartão de Crédito">Cartão de Crédito</option>
+                            <option value="Débito">Débito</option>
                             <option value="Boleto">Boleto</option>
                             <option value="Depósito">Depósito</option>
-                            <option value="Débito">Débito</option>
                             <option value="Pix">Pix</option>
                         </select>
                     </div>
@@ -427,7 +427,7 @@ $periodo = $this->input->get('periodo');
 <div id="modalExcluir" class="modal hide fade widget_box_vizualizar4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
     <div class="modal_header_anexos">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <button type="button" class="close" style="color:#f00" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">Excluir Lançamento</h3>
     </div>
     <div class="modal-body">

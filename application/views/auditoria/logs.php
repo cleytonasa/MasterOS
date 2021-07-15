@@ -8,9 +8,7 @@
         <h5>Logs</h5>
     </div>
     <div class="widget-content nopadding">
-    <!--
-    <div class="widget_box_Painel2">
-    -->
+    
         <table id="tabela" width="100%" class="table_p">
             <thead>
                 <tr>
@@ -46,7 +44,7 @@
 <div id="modal-excluir" class="modal hide fade widget_box_vizualizar4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form action="<?php echo site_url('auditoria/clean') ?>" method="post">
         <div class="modal_header_anexos">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <button type="button" class="close" style="color:#f00" data-dismiss="modal" aria-hidden="true">×</button>
             <h5>Limpeza de Logs</h5>
         </div>
         <div class="modal-body">

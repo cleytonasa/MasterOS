@@ -25,15 +25,15 @@
                         </h4>
                     </div>
                         <div class="widget_content nopadding">
-
-                            <table width="1100" class="table_v">
+                        <table width="100%" class="table_v">
                                 <thead>
                                     <tr>
-                                        <th width="480" style="font-size: 15px">Nome</th>
+                                        <th width="400" style="font-size: 15px">Nome</th>
                                         <th width="170" style="font-size: 15px">Documento</th>
                                         <th width="150" style="font-size: 15px">Telefone</th>
                                         <th width="200" style="font-size: 15px">Email</th>
-                                        <th width="100" style="font-size: 15px">Cadastro</th>
+                                        <th width="150" style="font-size: 15px">Senha</th>
+                                        <th width="120" style="font-size: 15px">Cadastro</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -44,6 +44,7 @@
                                         <td align="center"><?= $c->documento ?></td>
                                         <td align="center"><?= $c->telefone ?></td>
                                         <td align="center"><?= $c->email ?></td>
+                                        <td align="center"><?= $c->senha ?></td>
                                         <td align="center"><?= $dataCadastro ?></td>
                                     </tr>
                                     <?php endforeach ?>

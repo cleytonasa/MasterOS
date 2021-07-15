@@ -46,7 +46,7 @@
                 <li><a data-toggle="tab" href="#menu2">Endereço</a></li>
             </ul>
             <form action="<?php echo current_url(); ?>" id="formCliente" method="post" class="form-horizontal">
-                <div class="widget-content nopadding tab-content">
+                <div class="nopadding tab-content">
                     <?php if ($custom_error != '') {
                         echo '<div class="alert alert-danger">' . $custom_error . '</div>';
                     } ?>
@@ -75,7 +75,8 @@
                             <input id="senha" class="senha" type="text" name="senha" value="<?php echo $result->senha; ?>" />
                       </div>
                     </div>
-                    <!--    <div class="control-group">
+                    <!--
+                    <div class="control-group">
                     <label for="senha" class="control-label">Senha<span class="required">*</span></label>
 					<?php function gerar_senha($tamanho, $maiusculas, $minusculas, $numeros, $simbolos){
   $ma = "ABCDEFGHIJKLMNOPQRSTUVYXWZ"; // $ma contem as letras maiúsculas
@@ -109,7 +110,7 @@
 ?>
                         <div class="controls">
                         
-                            <input id="senha" class="senha" type="text" name="senha" value="<?php echo gerar_senha(10, true, true, true, false); ?>" />
+                            <input id="senha" class="senha" type="text" name="senha" value="<?php echo gerar_senha(12, true, true, true, false); ?>" />
                       </div>
                   </div>
                   -->

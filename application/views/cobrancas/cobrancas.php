@@ -44,7 +44,7 @@
                         }
 
                         echo '<td>' .  $cobrancaStatus . '</td>';
-                        echo '<td>R$ ' . number_format($r->total / 100, 2, ',', '.') . '</td>';
+                        echo '<td>R$: ' . number_format($r->total / 100, 2, ',', '.') . '</td>';
                         echo '<td>';
                         if ($this->permission->checkPermission($this->session->userdata('permissao'), 'vCobranca')) {
                             echo '<a style="margin-right: 1%" href="#modal-cancelar" role="button" data-toggle="modal" cancela_id="' . $r->idCobranca . '" class="btn tip-top" title="Cancelar cobrança"><i class="fas fa-power-off"></i></a>';
@@ -72,7 +72,7 @@
 <div id="modal-excluir" class="modal hide fade widget_box_vizualizar4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form action="<?php echo base_url() ?>index.php/cobrancas/excluir" method="post">
         <div class="modal_header_anexos">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <button type="button" class="close" style="color:#f00" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Excluir cobrança</h3>
         </div>
         <div class="modal-body">
@@ -89,7 +89,7 @@
 <div id="modal-confirmar" class="modal hide fade widget_box_vizualizar4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form action="<?php echo base_url() ?>index.php/cobrancas/confirmarpagamento" method="post">
         <div class="modal_header_anexos">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <button type="button" class="close" style="color:#f00" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Confirmar pagamento</h3>
         </div>
         <div class="modal-body">
@@ -106,7 +106,7 @@
 <div id="modal-cancelar" class="modal hide fade widget_box_vizualizar4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form action="<?php echo base_url() ?>index.php/cobrancas/cancelar" method="post">
         <div class="modal_header_anexos">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <button type="button" class="close" style="color:#f00" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Cancelar cobrança</h3>
         </div>
         <div class="modal-body">

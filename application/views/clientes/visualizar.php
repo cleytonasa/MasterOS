@@ -25,7 +25,7 @@
                     </div>
                     
                     <div class="collapse in accordion-body" id="collapseGOne">
-                        <div class="widget_content_vusualizar widget_box_vizualizar2">
+                        <div class="widget_content">
                             <table class="table_p">
                                 <tbody>
                                 <tr>
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                     <div class="collapse accordion-body" id="collapseGTwo">
-                        <div class="widget_content_vusualizar widget_box_vizualizar2">
+                        <div class="widget_content">
                             <table class="table_p">
                                 <tbody>
                                 <tr>
@@ -77,7 +77,7 @@
                         			<td>
                         <?php if ($this->permission->checkPermission($this->session->userdata('permissao'), 'eOs')) {
 												$zapnumber = preg_replace("/[^0-9]/", "", $result->telefone);
-                        echo '<a title="Enviar Por WhatsApp" class="btn btn-mini btn btn-success" id="enviarWhatsApp" target="_blank" href="https://web.whatsapp.com/send?phone=55' . $zapnumber . '"><i class="fab fa-whatsapp"></i> WhatsApp</a>';} ?>
+                        echo '<a title="Enviar Por WhatsApp" class="btn btn-mini btn btn-success" id="enviarWhatsApp" href="whatsapp://send?phone=55' . $zapnumber . '"><i class="fab fa-whatsapp"></i> WhatsApp</a>';} ?>
                                     </td>
                                     </tr>
                                 <tr>
@@ -95,7 +95,7 @@
                                 <tr>
                                     <td style="text-align: right; width: 30%"><strong>Senha</strong></td>
                                     <td>
-                                        <?php echo $result->contato ?>
+                                        <?php echo $result->senha ?>
                                     </td><td></td>
                                 </tr>
                                 </tbody>
@@ -113,7 +113,7 @@
                         </div>
                     </div>
                     <div class="collapse accordion-body" id="collapseGThree">
-                        <div class="widget_content_vusualizar widget_box_vizualizar2">
+                        <div class="widget_content">
                             <table class="table_p">
                                 <tbody>
                                 <tr>

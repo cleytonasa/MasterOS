@@ -33,6 +33,10 @@
                                             <?php } ?>
                                             
 <a href="#modal-whatsapp" title="Enviar WhatsApp" id="btn-whatsapp" role="button" data-toggle="modal" class="btn btn-mini btn-success"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+
+<a title="Enviar por E-mail" class="btn btn-mini btn-warning"
+                       href="<?php echo site_url() ?>/os/enviar_email/<?php echo $result->idOs; ?>"><i
+                                class="fas fa-envelope"></i> Enviar por E-mail</a>
                         
 <div class="row-fluid" style="margin-top:0">
     <div class="span12">
@@ -203,8 +207,7 @@
                                     </div>
                                     <div class="span2">
                                         <label for="">Preço</label>
-                                        <input type="text" placeholder="Preço" id="preco" name="preco"
-                                               class="span12 money"/>
+                                        <input type="text" placeholder="Preço" id="preco" name="preco" class="span12 money" data-affixes-stay="true" data-thousands="" data-decimal="." />
                                     </div>
                                     <div class="span2">
                                         <label for="">Quantidade</label>
@@ -212,7 +215,7 @@
                                                class="span12"/>
                                     </div>
                                     <div class="span2">
-                                        <label for="">.</label>
+                                        <label for="">&nbsp;</label>
                                         <button class="btn btn-success span12" id="btnAdicionarProduto"><i
                                                     class="fas fa-plus"></i> Adicionar
                                         </button>
@@ -225,12 +228,11 @@
                                     <thead>
                                     <tr>
                                        		<th width="10%">Cod. Produto</th>
-                                            <th width="10%">Cod. Barras</th>
-                                            <th>Produto</th>
-                                            <th width="8%">Quantidade</th>
-                                            <th width="10%">Preço unit.</th>
-                                            <th width="6%">Ações</th>
-                                            <th width="10%">Sub-total</th>
+                                       		<th>Produto</th>
+                                       		<th width="8%">Quantidade</th>
+                                       		<th width="10%">Preço unit.</th>
+                                       		<th width="6%">Ações</th>
+                                       		<th width="10%">Sub-total</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -238,9 +240,8 @@
                                     $total = 0;
                                     foreach ($produtos as $p) {
                                         $total = $total + $p->subTotal;
-                                        echo '<tr>';
-											echo '<td><div align="center">' . $p->idProdutos . '</td>';
-                                            echo '<td><div align="center">' . $p->codDeBarra . '</td>';
+                                            echo '<tr>';
+                                            echo '<td><div align="center">' . $p->idProdutos . '</td>';
                                             echo '<td>' . $p->descricao . '</td>';
                                             echo '<td><div align="center">' . $p->quantidade . '</td>';
                                             echo '<td><div align="center">R$: ' . ($p->preco ?: $p->precoVenda)  . '</td>';
@@ -249,11 +250,11 @@
                                             echo '</tr>';
                                     } ?>
                                     <tr>
-                                        <td colspan="6" style="text-align: right"><strong>Total:</strong></td>
-                                        <td><strong>R$
+                                        <td colspan="5" style="text-align: right"><strong>Total:</strong></td>
+                                        <td><strong><div align="center">R$:
                                                 <?php echo number_format($total, 2, ',', '.'); ?><input type="hidden"
                                                                                                         id="total-venda"
-                                                                                                        value="<?php echo number_format($total, 2); ?>"></strong>
+                                                                                                        value="<?php echo number_format($total, 2); ?>"></strong></div>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -274,14 +275,14 @@
                                         </div>
                                         <div class="span2">
                                             <label for="">Preço</label>
-                                            <input type="text" placeholder="Preço" id="preco_servico" name="preco" class="span12 money" />
+                                            <input type="text" placeholder="Preço" id="preco_servico" name="preco" class="span12 money" data-affixes-stay="true" data-thousands="" data-decimal="." />
                                         </div>
                                         <div class="span2">
                                             <label for="">Quantidade</label>
                                             <input type="text" placeholder="Quantidade" id="quantidade_servico" name="quantidade" class="span12" />
                                         </div>
                                         <div class="span2">
-                                            <label for="">.</label>
+                                            <label for="">&nbsp;</label>
                                             <button class="btn btn-success span12"><i class="fas fa-plus"></i> Adicionar</button>
                                         </div>
                                     </form>
@@ -308,16 +309,16 @@
                                                 echo '<tr>';
                                                 echo '<td>' . $s->nome . '</td>';
                                                 echo '<td><div align="center">' . ($s->quantidade ?: 1) . '</div></td>';
-                                                echo '<td><div align="center">R$ ' . $preco  . '</div></td>';
+                                                echo '<td><div align="center">R$: ' . $preco  . '</div></td>';
                                                 echo '<td><div align="center"><span idAcao="' . $s->idServicos_os . '" title="Excluir Serviço" class="btn btn-danger servico"><i class="fas fa-trash-alt"></i></span></div></td>';
-                                                echo '<td><div align="center">R$ ' . number_format($subtotals, 2, ',', '.') . '</div></td>';
+                                                echo '<td><div align="center">R$: ' . number_format($subtotals, 2, ',', '.') . '</div></td>';
                                                 echo '</tr>';
                                             } ?>
                                             <tr>
                                                 <td colspan="4" style="text-align: right"><strong>Total:</strong></td>
-                                                <td><strong>R$
+                                                <td><strong><div align="center">R$:
                                                 <?php echo number_format($totals, 2, ',', '.'); ?><input type="hidden" id="total-servico" value="
-												<?php echo number_format($totals, 2); ?>"></strong></td>
+												<?php echo number_format($totals, 2); ?>"></strong></div></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -335,7 +336,7 @@
                                             <input type="file" class="span12" name="userfile[]" multiple="multiple" />
                                         </div>
                                         <div class="span2">
-                                            <label for="">.</label>
+                                            <label for="">&nbsp;</label>
                                             <button class="btn btn-success span12"><i class="fas fa-paperclip"></i> Anexar</button>
                                         </div>
                                     </form>
@@ -414,41 +415,58 @@
                                         <thead>
                                             <tr>
                                                 <th>Equipamento</th>
-                                                <th>Modelo/Cor</th>
-                                                <th>Nº Série</th>
+                                                <th>Marca</th>
+                                                <th>Tipo</th>
+                                                <th>Nº Serie</th>
+                                                <th>Modelo</th>
+                                                <th>Cor</th>
                                                 <th>Voltagem</th>
-                                                <th>Observação</th>
-                                                <th>Ações</th>
+                                                <th>Potência</th>
+                                                <th>Obs:</th>
+                                                <th>Ação</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
-                                            foreach ($equipamento as $a) {
+                                            foreach ($equipamentos as $x) {
                                                 echo '<tr>';
-                                                echo '<td><div align="center">' . $a->equipamento . '</div></td>';
-                                                echo '<td><div align="center">' . $a->modelo . '</div></td>';
-												echo '<td><div align="center">' . $a->num_serie . '</div></td>';
-												echo '<td><div align="center">' . $a->voltagem . '</div></td>';
-												echo '<td><div align="center">' . $a->observacao . '</div></td>';
-                                                echo '<td><div align="center"><span idAcao="' . $a->idEquipamento . '" title="Excluir Equipamento" class="btn btn-danger equipamento"><i class="fas fa-trash-alt"></i></span></div></td>';
+                                                echo '<td><div align="center">' . $x->equipamento . '</div></td>';
+                                                echo '<td><div align="center">' . $x->marca . '</div></td>';
+                                                echo '<td><div align="center">' . $x->tipo . '</div></td>';
+                                                echo '<td><div align="center">' . $x->num_serie . '</div></td>';
+                                                echo '<td><div align="center">' . $x->modelo . '</div></td>';
+                                                echo '<td><div align="center">' . $x->cor . '</div></td>';
+                                                echo '<td><div align="center">' . $x->voltagem . '</div></td>';
+                                                echo '<td><div align="center">' . $x->potencia . '</div></td>';
+                                                echo '<td><div align="center">' . $x->observacao . '</div></td>';
+                                                echo '<td><div align="center"><span idAcao="' . $x->idEquipamento . '" title="Excluir Equipamento" class="btn btn-danger equipamento"><i class="fas fa-trash-alt"></i></span></div></td>';
                                                 echo '</tr>';
                                             }
-                                            if (!$equipamento) {
-                                                echo '<tr><td colspan="6">Nenhum Equipamento cadastrado</td></tr>';
+                                            if (!$equipamentos) {
+                                                echo '<tr><td colspan="10">Nenhum Equipamento cadastrado</td></tr>';
                                             }
 
                                             ?>
                                         </tbody>
                                     </table>
-                 </div></div></div></div></div>&nbsp
-                 </div></div></div></div></div>
-                        <!-- Fim tab Equipamentos -->
+                 </div>
+                 </div>
+                 </div>
+                 <!-- Fim tab Equipamentos -->
+                 </div>
+                 </div>&nbsp
+                 </div>
+                 </div>
+                 </div>
+                 </div>
+                 </div>
+                        
                  
 
 <!-- Modal visualizar anexo -->
 <div id="modal-anexo" class="modal hide fade widget_box_vizualizar4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal_header_anexos">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <button type="button" class="close" style="color:#f00" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">Visualizar Anexo</h3>
     </div>
     <div class="modal-body">
@@ -459,7 +477,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
+        <button class="btn btn-warning" data-dismiss="modal" aria-hidden="true">Fechar</button>
         <a href="" id-imagem="" class="btn btn-inverse" id="download">Download</a>
         <a href="" link="" class="btn btn-danger" id="excluir-anexo">Excluir Anexo</a>
     </div>
@@ -469,7 +487,7 @@
 <div id="modal-anotacao" class="modal hide fade widget_box_vizualizar4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form action="#" method="POST" id="formAnotacao">
         <div class="modal_header_anexos">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <button type="button" class="close" style="color:#f00" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">Adicionar Anotação</h3>
         </div>
         <div class="modal-body">
@@ -486,52 +504,69 @@
 </div>
 
 <!-- Modal cadastro Equipamentos -->
-<div id="modal-equipamento" class="modal hide fade widget_box_vizualizar4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form action="#" method="POST" id="formEquipamento">
-        <div class="modal_header_anexos">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <div id="modal-equipamento" class="modal hide fade widget_box_vizualizar4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <form action="#" method="POST" id="formEquipamento">
+          <div class="modal_header_anexos">
+            <button type="button" class="close" style="color:#f00" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Adicionar Equipamento</h3>
-        </div>
-        <div class="modal-body">
+          </div>
+          <div class="modal-body">
           <div class="span6" style="margin-left: 0">
-                <label for="equipamento">Equipamento<span class="required">*</span></label>
+                <label for="equipamentos">Equipamento<span class="required">*</span></label>
                 <input name="equipamento" type="text" class="span12" id="equipamento" value="" />
           </div>
           <div class="span6">
-                <label for="modelo">Modelo/Cor</label>
-                <input name="modelo" type="text" class="span12" id="equipamento" value="" />
+                <label for="marca">Marca</label>
+                <input name="marca" type="text" class="span12" id="equipamento" value="" />
           </div>
           <div class="span6" style="margin-left: 0">
-                <label for="num_serie">Nº Série</label>
-                <input name="num_serie" type="text" class="span12" id="equipamento" value="" />
+          		<label for="modelo">Modelo</label>
+          		<input name="modelo" type="text" class="span12" id="equipamento" value="" />      
           </div>
           <div class="span6">
-                <label for="voltagem">Voltagem</label>
-                <input name="voltagem" type="text" class="span12" id="equipamento" value="" />
+          		<label for="cor">Cor</label>
+          		<input name="cor" type="text" class="span12" id="equipamento" value="" />
           </div>
-            <div class="span12" style="margin-left: 0">
+          <div class="span6" style="margin-left: 0">
+          		<label for="tipo">Tipo</label>
+          		<input name="tipo" type="text" class="span12" id="equipamento" value="" />      
+          </div>
+          <div class="span6">
+          		<label for="num_serie">Nº Serie</label>
+          		<input name="num_serie" type="text" class="span12" id="equipamento" value="" />
+          </div>
+          <div class="span6" style="margin-left: 0">
+          		<label for="voltagem">Voltagem</label>
+          		<input name="voltagem" type="text" class="span12" id="equipamento" value="" />      
+          </div>
+          <div class="span6">
+          		<label for="potencia">Potência</label>
+          		<input name="potencia" type="text" class="span12" id="equipamento" value="" />
+          </div>
+          <div class="span12" style="margin-left: 0">
               <label for="observacao">Observação</label>
-                <input name="observacao" type="text" class="span12" id="equipamento" value="" />
-                <input type="hidden" name="os_id" value="<?php echo $result->idOs; ?>">
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-warning" data-dismiss="modal" aria-hidden="true" id="btn-close-equipamento">Fechar</button>
-            <button class="btn btn-primary">Adicionar</button>
-        </div>
-    </form>
-</div>
+              <input name="observacao" type="text" class="span12" id="equipamento" value="" />
+              <input type="hidden" name="os_id" value="<?php echo $result->idOs; ?>">
+          </div>
+          </div>
+          <div class="modal-footer">
+              <button class="btn btn-warning" data-dismiss="modal" aria-hidden="true" id="btn-close-equipamento">Fechar</button>
+              <button class="btn btn-primary">Adicionar</button>
+          </div>
+          </form>
+          </div>
+<!-- Fim Modal cadastro Equipamentos -->
 
 <!-- Modal Faturar-->
 <div id="modal-faturar" class="modal hide fade widget_box_vizualizar4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form id="formFaturar" action="<?php echo current_url() ?>" method="post">
         <div class="modal_header_anexos">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <button type="button" class="close" style="color:#f00" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Faturar OS</h3>
         </div>
         <div class="modal-body">
-            <div class="span12 alert alert-info" style="margin-left: 0"> Obrigatório o preenchimento dos campos com asterisco.</div>
-            <div class="span12" style="margin-left: 0">
+        <div class="span12 alert alert-info" style="margin-left: 0"> Obrigatório o preenchimento dos campos com asterisco.</div>
+        <div class="span12" style="margin-left: 0">
                 <label for="descricao">Descrição</label>
                 <input class="span12" id="descricao" type="text" name="descricao" value="Fatura de OS Nº: <?php echo $result->idOs; ?> " />
             </div>
@@ -544,18 +579,24 @@
                 </div>
             </div>
             <div class="span12" style="margin-left: 0">
-                <div class="span4" style="margin-left: 0">
+                <div class="span5" style="margin-left: 0">
                     <label for="valor">Valor*</label>
                     <input type="hidden" id="tipo" name="tipo" value="receita" />
-                    <input class="span12 money" id="valor" type="text" name="valor"
-                           value="<?php echo number_format($total, 2); ?> "/>
+                    <input class="span12 money" id="valor" type="text" data-affixes-stay="true" data-thousands="" data-decimal="." name="valor" value="<?php echo number_format($totals + $total, 2); ?>" />
+                    <strong><span style="color: red" id="resultado"></span></strong>
                 </div>
                 <div class="span4">
-                    <label for="vencimento">Data Entrada*</label>
-                    <input class="span12 datepicker" autocomplete="off" id="vencimento" type="text" name="vencimento" />
+                    <label>Desconto</label>
+                    <input style="width: 4em;" id="num2"  type="text" placeholder="%" onblur="calcular()" maxlength="3" size="2"/>
                 </div>
             </div>
             <div class="span12" style="margin-left: 0">
+                <div class="span4" style="margin-left: 0">
+                    <label for="vencimento">Data Entrada*</label>
+                    <input class="span12 datepicker" autocomplete="on" id="vencimento" type="text" name="vencimento" />
+                </div>
+            </div>
+        <div class="span12" style="margin-left: 0">
                 <div class="span4" style="margin-left: 0">
                     <label for="recebido">Recebido?</label>
                     &nbsp &nbsp &nbsp &nbsp <input id="recebido" type="checkbox" name="recebido" value="1" />
@@ -563,27 +604,27 @@
                 <div id="divRecebimento" class="span8" style=" display: none">
                     <div class="span6">
                         <label for="recebimento">Data Recebimento</label>
-                        <input class="span12 datepicker" autocomplete="off" id="recebimento" type="text" name="recebimento" />
+                        <input class="span12 datepicker" autocomplete="on" id="recebimento" type="text" name="recebimento" />
                     </div>
                     <div class="span6">
                         <label for="formaPgto">Forma Pgto</label>
                         <select name="formaPgto" id="formaPgto" class="span12">
+
                             <option value="Dinheiro">Dinheiro</option>
                             <option value="Cartão de Crédito">Cartão de Crédito</option>
+                            <option value="Débito">Débito</option>
                             <option value="Boleto">Boleto</option>
                             <option value="Depósito">Depósito</option>
-                            <option value="Débito">Débito</option>
                             <option value="Pix">Pix</option>
                         </select>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button class="btn btn-warning" data-dismiss="modal" aria-hidden="true" id="btn-cancelar-faturar">Cancelar</button>
-                <button class="btn btn-primary">Faturar</button>
-            
-            </div>
-</div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-warning" data-dismiss="modal" aria-hidden="true" id="btn-cancelar-faturar">Cancelar</button>
+            <button class="btn btn-primary">Faturar</button>
+        </div>
     </form>
 </div>
 
@@ -591,14 +632,14 @@
 <div id="modal-whatsapp" class="modal hide fade widget_box_vizualizar4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form action="<?php echo current_url() ?>" method="post">
         <div class="modal_header_anexos">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <button type="button" class="close" style="color:#f00" data-dismiss="modal" aria-hidden="true">×</button>
             <div align="center">
               <?php if ($this->permission->checkPermission($this->session->userdata('permissao'), 'eOs')) {
 												$zapnumber = preg_replace("/[^0-9]/", "", $result->celular_cliente);
 												$totalOS = number_format($totals + $total, 2, ',', '.');
-                        echo '<a title="Enviar Por WhatsApp" class="btn btn-success" id="enviarWhatsApp" target="_blank" href="https://web.whatsapp.com/send?phone=55' . $zapnumber . '&text=Prezado(a)%20*' . $result->nomeCliente . '*.%0d%0a%0d%0aSua%20*O.S%20' . $result->idOs . '*%20referente%20ao%20equipamento%20*' . strip_tags($result->descricaoProduto) . '*%20foi%20atualizada%20para%20*' . $result->status . '*.%0d%0a%0d%0a' . strip_tags($result->defeito) . '%0d%0a%0d%0a' . strip_tags($result->laudoTecnico) . '%0d%0a%0d%0a' . strip_tags($result->observacoes) . '%0d%0a%0d%0aValor%20Total%20*R$&#58%20'. $totalOS . '*%0d%0a%0d%0a' . $configuration['whats_app1'] .'%0d%0a%0d%0aAtenciosamente,%20*' . $configuration['whats_app2'] . '*%20-%20*' . $configuration['whats_app3'] .'*%0d%0a%0d%0aAcesse%20a%20área%20do%20cliente%20pelo%20link%0d%0a'. $configuration['whats_app4'] .'%0d%0aE%20utilize%20estes%20dados%20para%20fazer%20Log-in%0d%0aEmail:%20*' . strip_tags($result->email) . '*%0d%0aSenha:%20*' . strip_tags($result->senha) . '*%0d%0aVocê%20poderá%20edita-la%20no%20menu%20*Minha%20Conta*"><i class="fab fa-whatsapp"></i> Enviar WhatsApp</a>';} ?>
-              
-            </div>
+                        echo '<a title="Enviar Por WhatsApp" class="btn btn-success" id="enviarWhatsApp" href="whatsapp://send?phone=55' . $zapnumber . '&text=Prezado(a)%20*' . $result->nomeCliente . '*.%0d%0a%0d%0aSua%20*O.S%20' . $result->idOs . '*%20referente%20ao%20equipamento%20*' . strip_tags($result->descricaoProduto) . '*%20foi%20atualizada%20para%20*' . $result->status . '*.%0d%0a%0d%0a' . strip_tags($result->defeito) . '%0d%0a%0d%0a' . strip_tags($result->observacoes) . '%0d%0a%0d%0a' . strip_tags($result->laudoTecnico) . '%0d%0a%0d%0aValor%20Total%20*R$&#58%20'. $totalOS . '*%0d%0a%0d%0a' . $configuration['whats_app1'] .'%0d%0a%0d%0aAtenciosamente,%20*' . $configuration['whats_app2'] . '*%20-%20*' . $configuration['whats_app3'] .'*%0d%0a%0d%0aAcesse%20a%20área%20do%20cliente%20pelo%20link%0d%0a'. $configuration['whats_app4'] .'%0d%0aE%20utilize%20estes%20dados%20para%20fazer%20Log-in%0d%0aEmail:%20*' . strip_tags($result->email) . '*%0d%0aSenha:%20*' . strip_tags($result->senha) . '*%0d%0aVocê%20poderá%20edita-la%20no%20menu%20*Minha%20Conta*"><i class="fab fa-whatsapp"></i> Enviar WhatsApp</a>';} ?>
+                        
+        </div>
         </div>
         <div class="modal-body">
         <div class="span12" style="margin-left: 0">
@@ -608,9 +649,9 @@
         <br>
         <?php echo $result->defeito ?>
         <br><br>
-        <?php echo $result->laudoTecnico ?>
-        <br><br>
         <?php echo $result->observacoes ?>
+        <br><br>
+        <?php echo $result->laudoTecnico ?>
         <br><br>
         <div>Valor Total <b>R$: <?php echo number_format($totals + $total, 2, ',', '.') ?></b></div>
         <br>
@@ -634,7 +675,20 @@
 <script src="<?php echo base_url(); ?>assets/js/maskmoney.js"></script>
 
 <script type="text/javascript">
-    $(document).ready(function() {
+    function calcular(){
+    var desconto = Number(document.getElementById("valor").value);
+    var num2 = Number(document.getElementById("num2").value);
+    var elemResult = document.getElementById("resultado");
+	
+    if (elemResult.textContent === undefined) {
+       elemResult.textContent = "Preço com Desconto: R$ " + String(desconto - num2 * desconto / 100) + ".	";
+    }
+    else { // IE
+       elemResult.innerText = "(Preço com Desconto: R$ " + String(desconto - num2 * desconto / 100) + ")";
+    }
+	}
+	
+	$(document).ready(function() {
 
         $(".money").maskMoney();
 
@@ -645,28 +699,6 @@
             } else {
                 $('#divRecebimento').hide();
             }
-        });
-
-        $(document).on('click', '#btn-faturar', function(event) {
-            event.preventDefault();
-            valor = $('#total-venda').val();
-            total_servico = $('#total-servico').val();
-            valor = valor.replace(',', '');
-            total_servico = total_servico.replace(',', '');
-            total_servico = parseFloat(total_servico);
-            valor = parseFloat(valor);
-            $('#valor').val(valor + total_servico);
-        });
-
-        $(document).on('click', '#btn-whatsapp', function(event) {
-            event.preventDefault();
-            valor = $('#total-venda').val();
-            total_servico = $('#total-servico').val();
-            valor = valor.replace(',', '');
-            total_servico = total_servico.replace(',', '');
-            total_servico = parseFloat(total_servico);
-            valor = parseFloat(valor);
-            $('#valor').val(valor + total_servico);
         });
 
         $("#formFaturar").validate({

@@ -18,9 +18,7 @@
     <h5>Produtos</h5>
     </div>
     <div class="widget-content nopadding">
-    <!--
-    <div class="widget_box_Painel2">
-    -->
+    
         <table id="tabela" width="100%" class="table_p">
             <thead>
             <tr>
@@ -37,7 +35,7 @@
 
             if (!$results) {
                 echo '<tr>
-                                <td colspan="5">Nenhum Produto Cadastrado</td>
+                                <td colspan="6">Nenhum Produto Cadastrado</td>
                                 </tr>';
             }
             foreach ($results as $r) {
@@ -73,7 +71,7 @@
 <div id="modal-excluir" class="modal hide fade widget_box_vizualizar4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form action="<?php echo base_url() ?>index.php/produtos/excluir" method="post">
         <div class="modal_header_anexos">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <button type="button" class="close" style="color:#f00" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel"><i class="fas fa-trash-alt"></i> Excluir Produto</h3>
         </div>
         <div class="modal-body">
@@ -91,7 +89,7 @@
 <div id="atualizar-estoque" class="modal hide fade widget_box_vizualizar4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form action="<?php echo base_url() ?>index.php/produtos/atualizar_estoque" method="post" id="formEstoque">
         <div class="modal_header_anexos">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <button type="button" class="close" style="color:#f00" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel"><i class="fas fa-plus-square"></i> Atualizar Estoque</h3>
         </div>
         <div class="modal-body">
@@ -121,7 +119,7 @@
 <div id="modal-etiquetas" class="modal hide fade widget_box_vizualizar4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form action="<?php echo base_url() ?>index.php/relatorios/produtosEtiquetas" method="get">
         <div class="modal_header_anexos">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <button type="button" class="close" style="color:#f00" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Gerar etiquetas com Código de Barras</h3>
         </div>
         <div class="modal-body">
@@ -173,7 +171,7 @@
 <div id="modal-etiquetas_sku" class="modal hide fade widget_box_vizualizar4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form action="<?php echo base_url() ?>index.php/relatorios/produtosEtiquetasSKU" method="get">
         <div class="modal_header_anexos">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <button type="button" class="close" style="color:#f00" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Gerar etiquetas com Cód. Produto</h3>
         </div>
         <div class="modal-body">
@@ -217,7 +215,7 @@
 <div id="modal-etiquetas-qr" class="modal hide fade widget_box_vizualizar4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form action="<?php echo base_url() ?>index.php/relatorios/produtosEtiquetasQR" method="get">
         <div class="modal_header_anexos">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <button type="button" class="close" style="color:#f00" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Gerar etiquetas com Código QR</h3>
         </div>
         <div class="modal-body">
